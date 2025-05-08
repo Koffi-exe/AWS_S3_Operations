@@ -3,11 +3,11 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import 'dotenv/config';
 
 const s3Client = new S3Client({
-    region: "us-east-1",
-    credentials: {
-        accessKeyId: process.env.accessKeyId,
-        secretAccessKey: process.env.secretAccessKey,
-    },
+    // region: "us-east-1",
+    // credentials: {
+    //     accessKeyId: process.env.accessKeyId,
+    //     secretAccessKey: process.env.secretAccessKey,
+    // },
 })
 
 async function getObjectUrl(key){

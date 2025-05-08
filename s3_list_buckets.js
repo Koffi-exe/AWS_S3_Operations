@@ -2,11 +2,12 @@ import { ListBucketsCommand, paginateListBuckets, S3Client } from "@aws-sdk/clie
 import 'dotenv/config'; 
 
 const s3Client = new S3Client({
-    region: "us-east-1",
-    credentials: {
-        accessKeyId: process.env.accessKeyId,
-        secretAccessKey: process.env.secretAccessKey
-    },
+    // region: "us-east-1",
+    // credentials: {
+    //     accessKeyId: process.env.accessKeyId,
+    //     secretAccessKey: process.env.secretAccessKey
+    // },
+    /// the env is set such that the credentials are automatically picked up from the environment variables
 }); 
 
 const buckets = [];
