@@ -1,24 +1,26 @@
 import { ListBucketsCommand, paginateListBuckets, S3Client } from "@aws-sdk/client-s3";
-import 'dotenv/config'; 
+import 'dotenv/config';
 
-const s3Client = new S3Client({
-    // region: "us-east-1",
-    // credentials: {
-    //     accessKeyId: process.env.accessKeyId,
-    //     secretAccessKey: process.env.secretAccessKey
-    // },
-    /// the env is set such that the credentials are automatically picked up from the environment variables
-}); 
 
 const buckets = [];
 var owner = null;
 // Dont panic just look through the AWS documentation for the S3Client and ListBucketsCommand to understand what is going on here.
 const main = async () => {
+    
+    const s3Client = new S3Client({
+        // region: "us-east-1",
+        // credentials: {
+        //     accessKeyId: process.env.accessKeyId,
+        //     secretAccessKey: process.env.secretAccessKey
+        // },
+        /// the env is set such that the credentials are automatically picked up from the environment variables
+    });
+
     try {
-        const paginator = paginateListBuckets({client: s3Client}, {});
+        const paginator = paginateListBuckets({ client: s3Client }, {});
         for await (const page of paginator) {
             console.log("Page:", page);
-            if(!owner){
+            if (!owner) {
                 owner = page.Owner.DisplayName;
             }
             buckets.push(page.Buckets);
@@ -38,7 +40,7 @@ main();
 //     try {
 //         const command = new ListBucketsCommand({});
 //         const response = await s3Client.send(command);
-//         console.log("Buckets:", response.Buckets);  
+//         console.log("Buckets:", response.Buckets);
 //     } catch (error) {
 //         console.error("Error listing buckets:", error);
 //     }
